@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom"
+import { BrowserRouter as Route, Routes } from "react-router-dom"
 import "@fontsource/ibm-plex-sans-thai"
 import PortfolioSelectionCFP from "./pages/portfolio_selection_cfp"
 import PortfolioCreationCFP from "./pages/portfolio_creation_cfp"
@@ -22,7 +22,7 @@ import CFPClientDebtPage from "./pages/cfp_client_debt"
 
 export default function App() {
   return (
-    <Router>
+    <BrowserRouter basename={"/financial-planner-cfp_client-part/"}>
       <Routes>
         <Route path="/" element={<CFPClientInfoPage />} />
         <Route
@@ -66,6 +66,6 @@ export default function App() {
         <Route path="/client-asset/" element={<CFPClientAssetPage />} />
         <Route path="/client-debt/" element={<CFPClientDebtPage />} />
       </Routes>
-    </Router>
+    </BrowserRouter>
   )
 }

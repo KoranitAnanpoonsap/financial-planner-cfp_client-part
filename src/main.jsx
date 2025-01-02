@@ -5,8 +5,6 @@ import "./index.css"
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
-    <BrowserRouter basename={"/financial-planner-cfp_client-part/"}>
-      <App />
-    </BrowserRouter>
+    <App />
   </StrictMode>
 )
