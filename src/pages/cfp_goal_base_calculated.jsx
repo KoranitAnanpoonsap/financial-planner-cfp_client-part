@@ -98,8 +98,7 @@ export default function CFPGoalBaseCalculated() {
   }
 
   // Are we short or sufficient?
-  const isSufficient =
-    generalGoalAnnualSaving <= Number(generalGoal.clientNetIncome)
+  const isSufficient = generalGoalAnnualSaving <= 0
 
   return (
     <div className="flex flex-col min-h-screen font-ibm">
