@@ -1,9 +1,5 @@
-import { BrowserRouter as Route, Routes } from "react-router-dom"
-import "@fontsource/ibm-plex-sans-thai"
-import PortfolioSelectionCFP from "./pages/portfolio_selection_cfp"
-import PortfolioCreationCFP from "./pages/portfolio_creation_cfp"
-import CFPCashflowBase from "./pages/cfp_cashflow_base"
-import CFPCashflowBaseCalculated from "./pages/cfp_cashflow_base_calculated"
+import React from "react"
+import { BrowserRouter, Routes, Route } from "react-router-dom"
 import CFPCashflowBaseDashboard from "./pages/cfp_cashflow_base_dashboard.jsx"
 import CFPGoalBase from "./pages/cfp_goal_base"
 import CFPGoalBaseCalculated from "./pages/cfp_goal_base_calculated"
@@ -19,6 +15,7 @@ import CFPClientIncomePage from "./pages/cfp_client_income"
 import CFPClientExpensePage from "./pages/cfp_client_expense"
 import CFPClientAssetPage from "./pages/cfp_client_asset"
 import CFPClientDebtPage from "./pages/cfp_client_debt"
+import "@fontsource/ibm-plex-sans-thai"
 
 export default function App() {
   return (
