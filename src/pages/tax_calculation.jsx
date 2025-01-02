@@ -1,4 +1,4 @@
-import { useEffect, useState, useCallback } from "react"
+import { useEffect, useState, useCallback, useRef } from "react"
 import { useNavigate } from "react-router-dom"
 import Footer from "../components/footer"
 import Header from "../components/header"
@@ -81,8 +81,8 @@ export default function TaxCalculationPage() {
     total: 0,
   })
 
-  // Debounce timer for investment updates
-  const [debounceTimer, setDebounceTimer] = useState(null)
+  // Initialize debounceTimer with useRef
+  const debounceTimer = useRef(null)
 
   // Fetch initial data on component mount
   useEffect(() => {
@@ -303,16 +303,23 @@ export default function TaxCalculationPage() {
     })
 
     // Debounce the save to avoid excessive localStorage writes
-    if (debounceTimer) {
-      clearTimeout(debounceTimer)
+    if (debounceTimer.current) {
+      clearTimeout(debounceTimer.current)
     }
 
-    const timer = setTimeout(() => {
+    debounceTimer.current = setTimeout(() => {
       saveInvestments(name, cappedValue)
     }, 500) // 500ms delay
-
-    setDebounceTimer(timer)
   }
+
+  // Clear the debounce timer on unmount
+  useEffect(() => {
+    return () => {
+      if (debounceTimer.current) {
+        clearTimeout(debounceTimer.current)
+      }
+    }
+  }, [])
 
   // Save investments to localStorage
   const saveInvestments = (fieldName, value) => {

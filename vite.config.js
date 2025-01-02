@@ -7,6 +7,6 @@ export default defineConfig({
   base: '/financial-planner-cfp_client-part/',
   build: {
     sourcemap: false, // Disable source maps to prevent 'eval' usage
-    // Alternatively, you can set it to true or 'hidden', but false is safest for CSP
+    minify: 'esbuild', // Ensure using esbuild for minification (default)
   },
 })
