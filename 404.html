@@ -1,19 +1,27 @@
-<!doctype html>
-<html lang="en">
+<!DOCTYPE html>
+<html>
   <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/financial-planner-cfp_client-part/TFPA_logo_only.png" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Financial Planner</title>
-    <meta
-      http-equiv="Content-Security-Policy"
-      content="default-src 'self'; script-src 'self' https://cdn.jsdelivr.net https://cdnjs.cloudflare.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data:;"
-    />
-    <script type="module" crossorigin src="/financial-planner-cfp_client-part/assets/index-DTv5M7j0.js"></script>
-    <link rel="stylesheet" crossorigin href="/financial-planner-cfp_client-part/assets/index-CBh-1hNI.css">
-  </head>
-  <body>
-    <div id="root"></div>
+    <meta charset="utf-8" />
+    <title>React Router</title>
+    <script type="text/javascript">
+      var pathSegmentsToKeep = 1;
 
-  </body>
+      var l = window.location;
+      l.replace(
+        l.protocol +
+          "//" +
+          l.hostname +
+          (l.port ? ":" + l.port : "") +
+          l.pathname
+            .split("/")
+            .slice(0, 1 + pathSegmentsToKeep)
+            .join("/") +
+          "/?/" +
+          l.pathname.slice(1).split("/").slice(pathSegmentsToKeep).join("/").replace(/&/g, "~and~") +
+          (l.search ? "&" + l.search.slice(1).replace(/&/g, "~and~") : "") +
+          l.hash
+      );
+    </script>
+  </head>
+  <body></body>
 </html>
