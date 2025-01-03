@@ -29,12 +29,12 @@ const LOCALSTORAGE_KEY_GOALS = "cashflowGoals"
 const SAMPLE_GOALS = [
   {
     id: { clientId: 1, clientGoalName: "ซื้อบ้าน" },
-    clientGoalValue: 3000000,
+    clientGoalValue: 2000000,
     clientGoalPeriod: 10,
   },
   {
     id: { clientId: 1, clientGoalName: "เรียนต่อต่างประเทศ" },
-    clientGoalValue: 1500000,
+    clientGoalValue: 1000000,
     clientGoalPeriod: 5,
   },
 ]
@@ -59,6 +59,28 @@ export default function CFPCashflowBase() {
 
   const [editMode, setEditMode] = useState(false)
   const [editingGoal, setEditingGoal] = useState(null)
+
+  useEffect(() => {
+    // Initialize sample goals in localStorage if not already present
+    const storedGoals = localStorage.getItem(LOCALSTORAGE_KEY_GOALS)
+    if (!storedGoals) {
+      localStorage.setItem(LOCALSTORAGE_KEY_GOALS, JSON.stringify(SAMPLE_GOALS))
+      setGoals(SAMPLE_GOALS)
+      console.log("Sample goals have been initialized.")
+    } else {
+      try {
+        const parsedGoals = JSON.parse(storedGoals)
+        setGoals(parsedGoals)
+      } catch (error) {
+        console.error("Error parsing stored goals:", error)
+        localStorage.setItem(
+          LOCALSTORAGE_KEY_GOALS,
+          JSON.stringify(SAMPLE_GOALS)
+        )
+        setGoals(SAMPLE_GOALS)
+      }
+    }
+  }, [])
 
   useEffect(() => {
     loadDataFromLocalStorage()

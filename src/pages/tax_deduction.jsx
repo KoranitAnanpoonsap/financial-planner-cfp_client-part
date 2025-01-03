@@ -87,6 +87,44 @@ export default function TaxDeductionPage() {
   const [expenseDeductions, setExpenseDeductions] = useState(0)
   const [exists, setExists] = useState(false) // To track if taxDeduction exists
 
+  // Sample taxDeduction data
+  const SAMPLE_TAX_DEDUCTION = {
+    maritalStatus: "โสด",
+    child: 1,
+    child2561: 1,
+    adoptedChild: 1,
+    parentalCare: 2,
+    disabledCare: 0,
+    prenatalCare: 0,
+    parentHealthInsurance: 15000,
+    lifeInsurance: 70000,
+    healthInsurance: 25000,
+    pensionInsurance: 150000,
+    spouseNoIncomeLifeInsurance: 0,
+    rmf: 100000,
+    ssf: 100000,
+    govPensionFund: 0,
+    pvd: 0,
+    nationSavingsFund: 10,
+    socialSecurityPremium: 0,
+    socialEnterprise: 0,
+    thaiEsg: 10000,
+    generalDonation: 7500,
+    eduDonation: 10,
+    politicalPartyDonation: 0,
+  }
+
+  /** Initialize localStorage with SAMPLE_TAX_DEDUCTION if not present */
+  useEffect(() => {
+    const storedDeduction = localStorage.getItem("taxDeduction")
+    if (!storedDeduction) {
+      localStorage.setItem("taxDeduction", JSON.stringify(SAMPLE_TAX_DEDUCTION))
+      setDeductionData(SAMPLE_TAX_DEDUCTION)
+      setExists(true)
+      console.log("Sample taxDeduction data has been initialized.")
+    }
+  }, [])
+
   // Fetch deduction data and income-related data from localStorage on mount
   useEffect(() => {
     fetchDeduction()

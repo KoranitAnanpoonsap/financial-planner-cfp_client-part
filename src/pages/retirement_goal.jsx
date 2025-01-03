@@ -21,6 +21,17 @@ const pageTransition = {
 const LOCALSTORAGE_KEY_PORTFOLIO = "portfolioAssets"
 const LOCALSTORAGE_KEY_RETIREMENT_GOAL = "retirementGoal"
 
+/** Sample retirementGoal data */
+const SAMPLE_RETIREMENT_GOAL = {
+  clientId: 1,
+  clientCurrentAge: 45,
+  clientRetirementAge: 60,
+  clientLifeExpectancy: 85,
+  clientCurrentYearlyExpense: 500000,
+  clientExpectedRetiredPortReturn: 0.05,
+  inflationRate: 0.03,
+}
+
 export default function RetirementGoalPage() {
   const [cfpId] = useState(Number(localStorage.getItem("cfpId")) || "")
   const [clientId] = useState(Number(localStorage.getItem("clientId")) || "")
@@ -43,6 +54,35 @@ export default function RetirementGoalPage() {
   const [retirementGoalExists, setRetirementGoalExists] = useState(false)
 
   const debounceTimer = useRef(null)
+
+  /** Initialize localStorage with SAMPLE_RETIREMENT_GOAL if not present */
+  useEffect(() => {
+    const storedGoal = localStorage.getItem(LOCALSTORAGE_KEY_RETIREMENT_GOAL)
+    if (!storedGoal) {
+      localStorage.setItem(
+        LOCALSTORAGE_KEY_RETIREMENT_GOAL,
+        JSON.stringify(SAMPLE_RETIREMENT_GOAL)
+      )
+      setRetirementGoalExists(true)
+      setClientCurrentAge(SAMPLE_RETIREMENT_GOAL.clientCurrentAge.toString())
+      setClientRetirementAge(
+        SAMPLE_RETIREMENT_GOAL.clientRetirementAge.toString()
+      )
+      setClientLifeExpectancy(
+        SAMPLE_RETIREMENT_GOAL.clientLifeExpectancy.toString()
+      )
+      setClientCurrentYearlyExpense(
+        SAMPLE_RETIREMENT_GOAL.clientCurrentYearlyExpense.toString()
+      )
+      setClientExpectedRetiredPortReturn(
+        (
+          SAMPLE_RETIREMENT_GOAL.clientExpectedRetiredPortReturn * 100
+        ).toString()
+      )
+      setInflationRate((SAMPLE_RETIREMENT_GOAL.inflationRate * 100).toString())
+      console.log("Sample retirementGoal data has been initialized.")
+    }
+  }, [])
 
   useEffect(() => {
     loadDataFromLocalStorage()

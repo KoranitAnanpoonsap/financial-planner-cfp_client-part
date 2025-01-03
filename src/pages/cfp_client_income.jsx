@@ -25,11 +25,11 @@ const SAMPLE_INCOMES = [
   {
     id: {
       clientId: 1,
-      clientIncomeName: "เงินเดือนหลัก",
+      clientIncomeName: "เงินเดือน",
     },
     clientIncomeType: "40(1) เงินเดือน",
-    clientIncomeFrequency: "ทุกเดือน",
-    clientIncomeAmount: 40000,
+    clientIncomeFrequency: "ทุกปี",
+    clientIncomeAmount: 800000,
     clientIncomeAnnualGrowthRate: 0.05,
     clientIncome405Type: "",
     clientIncome406Type: "",
@@ -38,15 +38,28 @@ const SAMPLE_INCOMES = [
   {
     id: {
       clientId: 1,
-      clientIncomeName: "รายได้จากเช่าบ้าน",
+      clientIncomeName: "ดอกเบี้ย",
     },
-    clientIncomeType: "40(5) ค่าเช่าทรัพย์สิน",
+    clientIncomeType: "40(4) ดอกเบี้ย เงินปันผล",
     clientIncomeFrequency: "ทุกปี",
-    clientIncomeAmount: 120000,
+    clientIncomeAmount: 10000,
     clientIncomeAnnualGrowthRate: 0.02,
-    clientIncome405Type: "บ้าน/โรงเรือน/สิ่งปลูกสร้าง/แพ/ยานพาหนะ",
+    clientIncome405Type: "",
     clientIncome406Type: "",
     clientIncome408Type: "",
+  },
+  {
+    id: {
+      clientId: 1,
+      clientIncomeName: "รายได้อื่นๆ",
+    },
+    clientIncomeType: "40(8) รายได้อื่นๆ",
+    clientIncomeFrequency: "ทุกปี",
+    clientIncomeAmount: 200000,
+    clientIncomeAnnualGrowthRate: 0.02,
+    clientIncome405Type: "",
+    clientIncome406Type: "",
+    clientIncome408Type: "เงินได้ประเภทที่ไม่อยู่ใน (1) ถึง (43)",
   },
 ]
 

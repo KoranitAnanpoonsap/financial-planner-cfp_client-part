@@ -89,8 +89,6 @@ export default function CFPGoalBaseDashboard() {
     navigate(`/goal-base/`)
   }
 
-  const isSufficient = generalGoalAnnualSaving <= 0
-
   // Component Definitions (Unchanged)
   const InvestmentProportion = () => {
     return (
@@ -135,7 +133,9 @@ export default function CFPGoalBaseDashboard() {
           <br />
           ต่อการออมหรือไม่
           <span className="text-[48px] font-bold font-sans">
-            {isSufficient ? "เพียงพอ" : "ไม่เพียงพอ"}
+            {generalGoalAnnualSaving <= Number(generalGoal.clientNetIncome)
+              ? "เพียงพอ"
+              : "ไม่เพียงพอ"}
           </span>
         </div>
       </div>

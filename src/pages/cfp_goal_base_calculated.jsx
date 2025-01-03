@@ -97,9 +97,6 @@ export default function CFPGoalBaseCalculated() {
     navigate(`/goal-base-dashboard`)
   }
 
-  // Are we short or sufficient?
-  const isSufficient = generalGoalAnnualSaving <= 0
-
   return (
     <div className="flex flex-col min-h-screen font-ibm">
       <Header />
@@ -188,19 +185,23 @@ export default function CFPGoalBaseCalculated() {
                 <div className="flex space-x-4 items-center text-tfpa_gold">
                   <span>เงินที่ต้องเก็บออมต่อปี</span>
                   <span>
-                    {Math.abs(generalGoalAnnualSaving).toLocaleString()}
+                    {generalGoalAnnualSaving < 0
+                      ? 0
+                      : generalGoalAnnualSaving.toLocaleString()}
                   </span>
                   <span>บาท</span>
                 </div>
 
                 <div
                   className={`px-52 py-2 rounded-3xl ${
-                    isSufficient
+                    generalGoalAnnualSaving <=
+                    Number(generalGoal.clientNetIncome)
                       ? "bg-green-300 text-green-950"
                       : "bg-red-300 text-red-950"
                   }`}
                 >
-                  {isSufficient
+                  {generalGoalAnnualSaving <=
+                  Number(generalGoal.clientNetIncome)
                     ? "เงินที่ออมอยู่ต่อปีมีเพียงพอ"
                     : "เงินที่ออมอยู่ต่อปีมีไม่เพียงพอ"}
                 </div>

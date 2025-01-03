@@ -23,6 +23,15 @@ const pageTransition = {
 const LOCALSTORAGE_KEY_PORTFOLIO = "portfolioAssets"
 const LOCALSTORAGE_KEY_GENERAL_GOAL = "generalGoal"
 
+const SAMPLE_GENERAL_GOAL = {
+  clientId: 1,
+  clientGeneralGoalName: "ซื้อรถยนต์",
+  clientGeneralGoalValue: 1000000,
+  clientGeneralGoalPeriod: 5,
+  clientNetIncome: 300000,
+  clientNetIncomeGrowth: 0.05,
+}
+
 export default function CFPGoalBase() {
   const [cfpId] = useState(Number(localStorage.getItem("cfpId")) || 1)
   const [clientId] = useState(Number(localStorage.getItem("clientId")) || 1)
@@ -44,6 +53,30 @@ export default function CFPGoalBase() {
 
   // For debouncing the auto-save of general goal
   const debounceTimer = useRef(null)
+
+  /** Initialize localStorage with SAMPLE_GENERAL_GOAL if not present */
+  useEffect(() => {
+    const storedGoal = localStorage.getItem(LOCALSTORAGE_KEY_GENERAL_GOAL)
+    if (!storedGoal) {
+      localStorage.setItem(
+        LOCALSTORAGE_KEY_GENERAL_GOAL,
+        JSON.stringify(SAMPLE_GENERAL_GOAL)
+      )
+      setGeneralGoalExists(true)
+      setClientNetIncome(SAMPLE_GENERAL_GOAL.clientNetIncome.toString())
+      setClientNetIncomeGrowth(
+        (SAMPLE_GENERAL_GOAL.clientNetIncomeGrowth * 100).toString()
+      )
+      setClientGeneralGoalName(SAMPLE_GENERAL_GOAL.clientGeneralGoalName)
+      setClientGeneralGoalValue(
+        SAMPLE_GENERAL_GOAL.clientGeneralGoalValue.toString()
+      )
+      setClientGeneralGoalPeriod(
+        SAMPLE_GENERAL_GOAL.clientGeneralGoalPeriod.toString()
+      )
+      console.log("Sample generalGoal data has been initialized.")
+    }
+  }, [])
 
   // Load portfolio + general goal from localStorage
   useEffect(() => {

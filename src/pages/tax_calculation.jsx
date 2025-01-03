@@ -81,8 +81,45 @@ export default function TaxCalculationPage() {
     total: 0,
   })
 
+  // Sample investment data
+  const SAMPLE_INVESTMENTS = {
+    rmf: 40000,
+    ssf: 0,
+    govPensionFund: 0,
+    pvd: 0,
+    nationSavingsFund: 0,
+    pensionInsurance: 6500,
+    total: 46500, // Sum of all investments
+  }
+
   // Initialize debounceTimer with useRef
   const debounceTimer = useRef(null)
+
+  const LOCALSTORAGE_KEY_INVESTMENTS = "taxPlan"
+  // Initialize sample investments in localStorage
+  useEffect(() => {
+    const storedInvestments = localStorage.getItem(LOCALSTORAGE_KEY_INVESTMENTS)
+    if (!storedInvestments) {
+      localStorage.setItem(
+        LOCALSTORAGE_KEY_INVESTMENTS,
+        JSON.stringify(SAMPLE_INVESTMENTS)
+      )
+      setInvestments(SAMPLE_INVESTMENTS)
+      console.log("Sample investments have been initialized.")
+    } else {
+      try {
+        const parsedInvestments = JSON.parse(storedInvestments)
+        setInvestments(parsedInvestments)
+      } catch (error) {
+        console.error("Failed to parse investments from localStorage:", error)
+        localStorage.setItem(
+          LOCALSTORAGE_KEY_INVESTMENTS,
+          JSON.stringify(SAMPLE_INVESTMENTS)
+        )
+        setInvestments(SAMPLE_INVESTMENTS)
+      }
+    }
+  }, [])
 
   // Fetch initial data on component mount
   useEffect(() => {
@@ -123,41 +160,6 @@ export default function TaxCalculationPage() {
         calculatedAlreadyUsed
       )
       setRemainingDeductions(calculatedRemaining)
-
-      // Fetch existing tax plan from localStorage
-      const taxPlanString = localStorage.getItem("taxPlan")
-      if (taxPlanString) {
-        try {
-          const taxPlanData = JSON.parse(taxPlanString)
-          setInvestments({
-            rmf: taxPlanData.investRmf || 0,
-            ssf: taxPlanData.investSsf || 0,
-            govPensionFund: taxPlanData.investGovPensionFund || 0,
-            pvd: taxPlanData.investPvd || 0,
-            nationSavingsFund: taxPlanData.investNationSavingsFund || 0,
-            pensionInsurance: taxPlanData.investPensionInsurance || 0,
-            total:
-              (taxPlanData.investRmf || 0) +
-              (taxPlanData.investSsf || 0) +
-              (taxPlanData.investGovPensionFund || 0) +
-              (taxPlanData.investPvd || 0) +
-              (taxPlanData.investNationSavingsFund || 0) +
-              (taxPlanData.investPensionInsurance || 0),
-          })
-        } catch (error) {
-          console.error("Failed to parse 'taxPlan' from localStorage.")
-        }
-      } else {
-        setInvestments({
-          rmf: 0,
-          ssf: 0,
-          govPensionFund: 0,
-          pvd: 0,
-          nationSavingsFund: 0,
-          pensionInsurance: 0,
-          total: 0,
-        })
-      }
 
       // Recalculate new tax based on investments
       const totalUsedDeductions = Math.min(
