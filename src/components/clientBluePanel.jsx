@@ -91,11 +91,13 @@ export default function ClientBluePanel() {
       label: "ตรวจสุขภาพทางการเงิน",
       icon: checkIcon,
       routes: [`/financial-healthcheck/`],
+      disabled: true,
     },
     {
       label: "การคำนวณภาษี",
       icon: checkIcon,
       routes: [`/tax-income/`, `/tax-deduction/`, `/tax-calculation/`],
+      disabled: true,
     },
   ]
 
@@ -127,7 +129,7 @@ export default function ClientBluePanel() {
           return (
             <button
               key={item.label}
-              onClick={() => navigate(item.routes[0])}
+              onClick={() => !item.disabled && navigate(item.routes[0])}
               className={`flex items-center space-x-2 px-2 py-2 rounded-2xl ${
                 isActive
                   ? "bg-tfpa_blue_panel_select"

@@ -253,6 +253,17 @@ export default function CFPClientIncomePage() {
     navigate(`/client-expense/`)
   }
 
+  const isFormValid = () => {
+    // Check if all required fields are filled
+    if (!type || type === "เลือก") return false
+    if (!incomeName) return false
+    if (!frequency) return false
+    if (!amount || parseFloat(amount) <= 0) return false
+    if (!growthRate || parseFloat(growthRate) < 0) return false
+
+    return true
+  }
+
   return (
     <div className="flex flex-col min-h-screen font-ibm">
       <Header />
@@ -500,6 +511,7 @@ export default function CFPClientIncomePage() {
                   <>
                     <button
                       onClick={handleCreateOrUpdateIncome}
+                      disabled={!isFormValid()}
                       className="bg-red-500 hover:bg-red-700 text-white px-4 py-2 rounded font-ibm font-bold"
                     >
                       แก้ไข
@@ -514,6 +526,7 @@ export default function CFPClientIncomePage() {
                 ) : (
                   <button
                     onClick={handleCreateOrUpdateIncome}
+                    disabled={!isFormValid()}
                     className="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded font-ibm font-bold"
                   >
                     เพิ่ม

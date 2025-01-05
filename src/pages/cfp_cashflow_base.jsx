@@ -185,6 +185,14 @@ export default function CFPCashflowBase() {
     navigate(`/cashflow-base-calculated/`)
   }
 
+  // Validation function
+  const isFormValid = () => {
+    if (!clientGoalName.trim()) return false // Ensure name is not empty
+    if (!clientGoalValue || parseFloat(clientGoalValue) <= 0) return false // Ensure value is positive
+    if (!clientGoalPeriod || parseInt(clientGoalPeriod) <= 0) return false // Ensure period is a positive integer
+    return true
+  }
+
   return (
     <div className="flex flex-col min-h-screen">
       <Header />
@@ -296,6 +304,7 @@ export default function CFPCashflowBase() {
                   <>
                     <button
                       onClick={handleCreateOrUpdateGoal}
+                      disabled={!isFormValid()}
                       className="bg-red-500 hover:bg-red-700 text-white px-4 py-2 rounded font-ibm font-bold"
                     >
                       แก้ไข
@@ -310,6 +319,7 @@ export default function CFPCashflowBase() {
                 ) : (
                   <button
                     onClick={handleCreateOrUpdateGoal}
+                    disabled={!isFormValid()}
                     className="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded font-ibm font-bold"
                   >
                     เพิ่มเป้าหมาย

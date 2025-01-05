@@ -235,6 +235,21 @@ export default function CFPClientDebtPage() {
     navigate(`/client-asset/`)
   }
 
+  // Validation function
+  const isFormValid = () => {
+    // General validations
+    if (!debtType || debtType === "เลือก") return false
+    if (!debtName) return false
+    if (!debtTerm) return false
+    if (!amount || parseFloat(amount) <= 0) return false
+    if (!interest || parseFloat(interest) < 0) return false
+    if (!startDate || !/^\d{4}-\d{2}-\d{2}$/.test(startDate)) return false // Valid date format
+    if (!years || parseInt(years) <= 0) return false
+    if (!principal || parseFloat(principal) < 0) return false
+
+    return true
+  }
+
   return (
     <div className="flex flex-col min-h-screen font-ibm">
       <Header />
@@ -427,6 +442,7 @@ export default function CFPClientDebtPage() {
                   <>
                     <button
                       onClick={handleCreateOrUpdateDebt}
+                      disabled={!isFormValid()}
                       className="bg-red-500 hover:bg-red-700 text-white px-4 py-2 rounded font-ibm font-bold"
                     >
                       แก้ไข
@@ -441,6 +457,7 @@ export default function CFPClientDebtPage() {
                 ) : (
                   <button
                     onClick={handleCreateOrUpdateDebt}
+                    disabled={!isFormValid()}
                     className="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded font-ibm font-bold"
                   >
                     เพิ่ม

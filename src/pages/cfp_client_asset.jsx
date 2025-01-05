@@ -228,6 +228,23 @@ export default function CFPClientAssetPage() {
     navigate(`/client-debt/`)
   }
 
+  // Validation function
+  const isFormValid = () => {
+    // General validations
+    if (!assetType || assetType === "เลือก") return false
+    if (!assetName) return false
+    if (!assetAmount || parseFloat(assetAmount) <= 0) return false
+
+    // Conditional validations based on asset type
+    if (assetType === "สินทรัพย์ส่วนตัว" && !buyDate) return false
+    if (assetType === "สินทรัพย์ลงทุนปัจจุบัน") {
+      if (!investType) return false
+      if (!investRisk) return false
+    }
+
+    return true
+  }
+
   return (
     <div className="flex flex-col min-h-screen font-ibm">
       <Header />
@@ -403,6 +420,7 @@ export default function CFPClientAssetPage() {
                   <>
                     <button
                       onClick={handleCreateOrUpdateAsset}
+                      disabled={!isFormValid()}
                       className="bg-red-500 hover:bg-red-700 text-white px-4 py-2 rounded font-ibm font-bold"
                     >
                       แก้ไข
@@ -417,6 +435,7 @@ export default function CFPClientAssetPage() {
                 ) : (
                   <button
                     onClick={handleCreateOrUpdateAsset}
+                    disabled={!isFormValid()}
                     className="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded font-ibm font-bold"
                   >
                     เพิ่ม

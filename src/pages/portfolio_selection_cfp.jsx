@@ -193,6 +193,24 @@ export default function PortfolioSelectionCFP() {
     navigate(`/portfolio-chart/`)
   }
 
+  // Validation function
+  const isFormValid = () => {
+    // General validations
+    if (!investType || investType === "เลือก") return false
+    if (!investName) return false
+    if (!investAmount || parseFloat(investAmount) <= 0) return false
+
+    // Custom return validation for "การลงทุนอื่นๆ"
+    if (
+      investType === "การลงทุนอื่นๆ" &&
+      (!customReturn || parseFloat(customReturn) <= 0)
+    ) {
+      return false
+    }
+
+    return true
+  }
+
   return (
     <div className="flex flex-col min-h-screen">
       <Header />
@@ -281,6 +299,7 @@ export default function PortfolioSelectionCFP() {
                   <>
                     <button
                       onClick={handleCreateOrUpdateAsset}
+                      disabled={!isFormValid()}
                       className="bg-red-500 hover:bg-red-700 text-white px-4 py-2 rounded font-ibm font-bold"
                     >
                       แก้ไข
@@ -295,6 +314,7 @@ export default function PortfolioSelectionCFP() {
                 ) : (
                   <button
                     onClick={handleCreateOrUpdateAsset}
+                    disabled={!isFormValid()}
                     className="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded font-ibm font-bold"
                   >
                     เพิ่ม

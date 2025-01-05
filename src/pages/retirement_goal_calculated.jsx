@@ -184,10 +184,7 @@ export default function RetirementGoalCalculated() {
 
             {/* Dashboard Button */}
             <div className="flex justify-center mt-4 mb-4">
-              <button
-                onClick={handleDashboard}
-                className="bg-tfpa_blue hover:bg-tfpa_blue_hover text-white px-4 py-2 rounded font-bold"
-              >
+              <button className="bg-tfpa_blue hover:bg-tfpa_blue_hover text-white px-4 py-2 rounded font-bold">
                 Dashboard
               </button>
             </div>
