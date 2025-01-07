@@ -354,6 +354,7 @@ export default function CFPClientAssetPage() {
                   <input
                     type="number"
                     value={assetAmount}
+                    onWheel={(e) => e.target.blur()}
                     onChange={(e) => setAssetAmount(e.target.value)}
                     className="border rounded p-2 w-full focus:outline-none focus:ring-2 focus:ring-tfpa_blue"
                   />

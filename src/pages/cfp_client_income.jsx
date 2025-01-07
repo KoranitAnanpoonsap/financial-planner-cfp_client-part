@@ -487,6 +487,7 @@ export default function CFPClientIncomePage() {
                 <input
                   type="number"
                   value={amount}
+                  onWheel={(e) => e.target.blur()}
                   onChange={(e) => setAmount(e.target.value)}
                   className="border rounded p-2 w-full focus:outline-none focus:ring-2 focus:ring-tfpa_blue"
                 />
@@ -500,6 +501,7 @@ export default function CFPClientIncomePage() {
                 <input
                   type="number"
                   value={growthRate}
+                  onWheel={(e) => e.target.blur()}
                   onChange={(e) => setGrowthRate(e.target.value)}
                   className="border rounded p-2 w-full focus:outline-none focus:ring-2 focus:ring-tfpa_blue"
                 />

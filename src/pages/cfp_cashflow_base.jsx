@@ -286,6 +286,7 @@ export default function CFPCashflowBase() {
                 type="number"
                 placeholder="จำนวนเงินเพื่อเป้าหมาย"
                 value={clientGoalValue}
+                onWheel={(e) => e.target.blur()}
                 onChange={(e) => setClientGoalValue(e.target.value)}
                 className="border rounded p-2 mb-2 w-full font-ibm focus:outline-none focus:ring-2 focus:ring-tfpa_blue"
               />
@@ -296,6 +297,7 @@ export default function CFPCashflowBase() {
                 type="number"
                 placeholder="ระยะเวลาเป้าหมาย (ปี)"
                 value={clientGoalPeriod}
+                onWheel={(e) => e.target.blur()}
                 onChange={(e) => setClientGoalPeriod(e.target.value)}
                 className="border rounded p-2 mb-2 w-full font-ibm focus:outline-none focus:ring-2 focus:ring-tfpa_blue"
               />

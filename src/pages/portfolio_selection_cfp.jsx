@@ -286,6 +286,7 @@ export default function PortfolioSelectionCFP() {
                 type="number"
                 placeholder="มูลค่าที่ลงทุนปัจจุบัน"
                 value={investAmount}
+                onWheel={(e) => e.target.blur()}
                 onChange={(e) => setInvestAmount(e.target.value)}
                 className="border rounded p-2 mb-2 w-full font-ibm"
               />
